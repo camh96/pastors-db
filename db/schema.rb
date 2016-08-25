@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(version: 20160825035637) do
     t.string   "landline_tel_alternate"
     t.string   "facebook"
     t.string   "region"
+    t.string   "country"
   end
 
   create_table "people", force: :cascade do |t|

@@ -7,5 +7,6 @@ class AddFieldsToChurch < ActiveRecord::Migration
     add_column :churches, :landline_tel_alternate, :string
     add_column :churches, :facebook, :string
     add_column :churches, :region, :string
+    add_column :churches, :country, :string
   end
 end
