@@ -8,8 +8,8 @@ class CreateChurches < ActiveRecord::Migration
       t.string :address
       t.string :website
       t.string :landline_tel
-      t.boolean :active, default: true, null:false
-      t.boolean :pastorscoop, default: false, null:false
+      t.boolean :active, default: true, null: false
+      t.boolean :pastorscoop, default: false, null: false
 
       t.timestamps null: false
     end
