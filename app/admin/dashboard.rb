@@ -5,8 +5,8 @@ ActiveAdmin.register_page "Dashboard" do
   content title: proc{ I18n.t("active_admin.dashboard") } do
     div class: "blank_slate_container", id: "dashboard_default_message" do
       span class: "blank_slate" do
-        span I18n.t("active_admin.dashboard_welcome.welcome")
-        small I18n.t("active_admin.dashboard_welcome.call_to_action")
+        span ("Harro")
+        small "Welcome to the Pastor Scoop Database. Any issues? Contact it@arisechurch.govt.nz"
       end
     end
 
@@ -23,11 +23,11 @@ ActiveAdmin.register_page "Dashboard" do
     #     end
     #   end
 
-    #   column do
-    #     panel "Info" do
-    #       para "Welcome to ActiveAdmin."
-    #     end
-    #   end
-    # end
+  #     columns do
+  #       panel "Hello!" do
+  #         para "Welcome to Pastor Database. This is still under development"
+  #       end
+  #     end
+    end
   end # content
-end
+
