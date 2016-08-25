@@ -11,7 +11,7 @@ ActiveAdmin.register Church do
     #column :church_name_alternative
     column :denomination
 
-    column :address
+    #column :address
     #column :suburb
     column :city
     #column :postcode
@@ -26,6 +26,35 @@ ActiveAdmin.register Church do
     column :website
     column :active
     actions
+  end
+
+  show do
+    attributes_table do
+      row :name
+      row :church_name_alternative
+      row :denomination
+
+      row :address
+      row :suburb
+      row :city
+      row :postcode
+      row :country
+
+      row :email
+      row :email_alternate
+      row :facebook
+      row :landline_tel
+      row :landline_tel_alternate
+      row :pastorscoop
+      row :website
+      row :active
+      row :people do
+        church.people.collect do |person|
+          link_to person.name, admin_person_path(person)
+        end.join(', ').html_safe
+      end
+    end
+    active_admin_comments
   end
 
   form do |f|
@@ -49,7 +78,6 @@ ActiveAdmin.register Church do
       input :pastorscoop
       input :active
       input :website
-      input :notes
     end
     f.actions
   end

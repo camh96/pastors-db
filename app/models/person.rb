@@ -20,7 +20,11 @@ class Person < ActiveRecord::Base
   validates :first_name, presence: true
   validates :church_id, presence: true
 
-  def to_s
+  def name
     [first_name, last_name].join(' ')
+  end
+
+  def to_s
+    name
   end
 end
