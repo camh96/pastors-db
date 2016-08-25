@@ -35,7 +35,7 @@ ActiveAdmin.register Church do
       input :suburb
       input :city
       input :postcode
-      input :country
+      input :country, priority_countries: ["NZ","AU","US","CA"]
 
       input :email
       input :email_alternate
@@ -46,6 +46,7 @@ ActiveAdmin.register Church do
       input :active
       input :website
     end
+    f.actions
   end
 
 end
