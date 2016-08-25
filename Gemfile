@@ -5,6 +5,8 @@ ruby '2.3.0'
 gem 'activeadmin', '~> 1.0.0.pre4'
 gem 'devise'
 
+gem 'country_select'
+
 gem 'rails', '4.2.6'
 gem 'pg', '~> 0.15'
 gem 'sass-rails', '~> 5.0'
