@@ -24,6 +24,7 @@ group :development do
   gem 'binding_of_caller'
   gem 'web-console', '~> 2.0'
   gem 'spring'
+  gem 'pry'
 end
 
 group :development, :test do

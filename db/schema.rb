@@ -50,25 +50,26 @@ ActiveRecord::Schema.define(version: 20160825035637) do
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "churches", force: :cascade do |t|
-    t.string   "church_name"
+    t.string   "name",                                   null: false
     t.string   "suburb"
     t.integer  "postcode"
     t.string   "city"
     t.string   "address"
     t.string   "website"
     t.string   "landline_tel"
-    t.boolean  "active",                  default: true,  null: false
-    t.boolean  "pastorscoop",             default: false, null: false
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.boolean  "active",                 default: true,  null: false
+    t.boolean  "pastorscoop",            default: false, null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.string   "email"
     t.string   "email_alternate"
-    t.string   "church_name_alternative"
+    t.string   "name_alternative"
     t.string   "denomination"
     t.string   "landline_tel_alternate"
     t.string   "facebook"
     t.string   "region"
     t.string   "country"
+    t.text     "notes"
   end
 
   create_table "people", force: :cascade do |t|
