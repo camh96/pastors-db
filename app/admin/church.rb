@@ -1,5 +1,5 @@
 ActiveAdmin.register Church do
-  permit_params :active, :address, :church_name, :church_name_alternative, :city, :denomination, :email, :email_alternate, :facebook, :landline_tel, :landline_tel_alternate, :pastorscoop, :postcode, :suburb, :website
+  permit_params :active, :address, :church_name, :church_name_alternative, :city, :country, :denomination, :email, :email_alternate, :facebook, :landline_tel, :landline_tel_alternate, :pastorscoop, :postcode, :suburb, :website
 
   index do
     id_column
