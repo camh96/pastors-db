@@ -24,9 +24,8 @@
 #
 
 class Church < ActiveRecord::Base
-  has_many :people
+  has_many :people, dependent: :destroy
 
-  def to_s
-    church_name
-  end
+  validates :name, presence: true
+
 end

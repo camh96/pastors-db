@@ -17,7 +17,14 @@
 class Person < ActiveRecord::Base
   belongs_to :church
 
-  def to_s
+  validates :first_name, presence: true
+  validates :church_id, presence: true
+
+  def name
     [first_name, last_name].join(' ')
+  end
+
+  def to_s
+    name
   end
 end
