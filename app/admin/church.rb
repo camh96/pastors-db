@@ -3,8 +3,11 @@ ActiveAdmin.register Church do
 
   config.sort_order = "name_asc"
 
+  scope "Pastors Coop", :pastorscoop, default: true
+  scope "Church Database", :churchdb
+
   index do
-    #id_column
+    # id_column
     column :name, sortable: :name do |church|
       link_to church.name, admin_church_path(church)
     end
@@ -27,6 +30,7 @@ ActiveAdmin.register Church do
     column :active
     actions
   end
+  
 
   show do
     attributes_table do

@@ -1,0 +1,17 @@
+TODO
+====
+
+Cam
+---
+
+[ ] Add pastorscoop (boolean) to Person; and tweak importer to import it, add filter to Person page (just copy from church page)
+[ ] Add Person information to Church page (like in a column on the right or something) (Kind of like the person page in Flocks)
+
+[ ] Deploy to staging site so Conference team can play with it
+
+
+Michael
+-------
+
+[ ] Automaticly add Churchs & Pastors to Church DB when senior pastors register for ARISE Conference.
+
