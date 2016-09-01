@@ -15,13 +15,12 @@
 #
 
 class Person < ActiveRecord::Base
-  belongs_to :church
+  has_and_belongs_to_many :churches
 
   scope :pastorscoop, -> { where(pastorscoop: true) }
   scope :churchdb, -> { where(pastorscoop: false) }
 
   validates :first_name, presence: true
-  validates :church_id, presence: true
 
   def name
     [first_name, last_name].join(' ')

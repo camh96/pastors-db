@@ -26,7 +26,7 @@
 #
 
 class Church < ActiveRecord::Base
-  has_many :people, dependent: :destroy
+  has_and_belongs_to_many :people
 
   validates :name, presence: true, uniqueness: true
 

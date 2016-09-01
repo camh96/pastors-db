@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160831215045) do
+ActiveRecord::Schema.define(version: 20160901035643) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,14 @@ ActiveRecord::Schema.define(version: 20160831215045) do
     t.text     "notes"
   end
 
+  create_table "churches_people", id: false, force: :cascade do |t|
+    t.integer "church_id", null: false
+    t.integer "person_id", null: false
+  end
+
+  add_index "churches_people", ["church_id", "person_id"], name: "index_churches_people_on_church_id_and_person_id", using: :btree
+  add_index "churches_people", ["person_id", "church_id"], name: "index_churches_people_on_person_id_and_church_id", using: :btree
+
   create_table "events", force: :cascade do |t|
     t.string   "name"
     t.integer  "registrations_database_event_id"
@@ -87,7 +95,6 @@ ActiveRecord::Schema.define(version: 20160831215045) do
   create_table "people", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
-    t.integer  "church_id"
     t.boolean  "conference"
     t.string   "mobile_tel"
     t.text     "notes"
@@ -97,7 +104,4 @@ ActiveRecord::Schema.define(version: 20160831215045) do
     t.datetime "updated_at",                  null: false
   end
 
-  add_index "people", ["church_id"], name: "index_people_on_church_id", using: :btree
-
-  add_foreign_key "people", "churches"
 end

@@ -1,5 +1,5 @@
 ActiveAdmin.register Church do
-  permit_params :active, :address, :church_name, :church_name_alternative, :city, :country, :denomination, :email, :email_alternate, :facebook, :landline_tel, :landline_tel_alternate, :pastorscoop, :postcode, :suburb, :website
+  permit_params :active, :address, :church_name, :church_name_alternative, :city, :country, :denomination, :email, :email_alternate, :facebook, :landline_tel, :landline_tel_alternate, :pastorscoop, :postcode, :suburb, :website, person_ids: []
 
   config.sort_order = "name_asc"
 
@@ -82,6 +82,8 @@ ActiveAdmin.register Church do
       input :pastorscoop
       input :active
       input :website
+
+      input :person_ids, as: :select, collection: Person.all, :input_html => {:multiple => true, class: 'select2'}, label: 'People'
     end
     f.actions
   end

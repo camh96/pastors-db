@@ -45,18 +45,18 @@ namespace :import do
       attributes = {
         first_name: row['Senior Pastor']&.strip,
         last_name: row['Surname']&.strip,
-        church_id: church.id,
         pastorscoop: pastorscoop
       }
-      Person.create(attributes)
+      person = Person.create(attributes)
+      church.people << person if person.valid?
 
       attributes = {
         first_name: row['Senior Pastor2']&.strip,
         last_name: row['Surname']&.strip,
-        church_id: church.id,
         pastorscoop: pastorscoop
       }
-      Person.create(attributes)
+      person = Person.create(attributes)
+      church.people << person if person.valid?
 
     end
 
@@ -93,23 +93,26 @@ namespace :import do
     church = Church.create(attributes)
 
     if church
-      new_pastor_from_church(row, church, 'His')
-      new_pastor_from_church(row, church, 'Her')
+      person = new_pastor_from_church(row, 'His')
+      church.people << person if person.valid?
+
+      person = new_pastor_from_church(row, 'Her')
+      church.people << person if person.valid?
     end
 
     return church
   end
 
-  def new_pastor_from_church(row, church, gender_prefix = 'His')
+  def new_pastor_from_church(row, gender_prefix = 'His')
     attributes = {
       first_name: row[gender_prefix + ' Name']&.strip,
       last_name: row['Surname']&.strip,
       mobile_tel: row[gender_prefix + ' Cellphone']&.strip,
       email: row[gender_prefix + ' Email']&.strip,
-      church_id: church.id,
       pastorscoop: true
     }
 
     return Person.create(attributes)
+  rescue ActiveRecord::RecordInvalid
   end
 end
