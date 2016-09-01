@@ -92,8 +92,9 @@ ActiveRecord::Schema.define(version: 20160831215045) do
     t.string   "mobile_tel"
     t.text     "notes"
     t.string   "email"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.boolean  "pastorscoop", default: false, null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   add_index "people", ["church_id"], name: "index_people_on_church_id", using: :btree

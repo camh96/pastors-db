@@ -16,6 +16,8 @@ namespace :import do
   end
 
   def new_church_from_church_db_row row
+    pastorscoop = row['ARISE Connect'].present?
+
     attributes = {
       name: row['Church']&.strip,
       name_alternative: row['AKA']&.strip,
@@ -31,7 +33,7 @@ namespace :import do
       facebook: row['Facebook ID']&.strip,
       landline_tel: row['MainPhone']&.strip,
       landline_tel_alternate: row['AlternatePhone']&.strip,
-      pastorscoop: row['ARISE Connect'].present?,
+      pastorscoop: pastorscoop,
       active: true,
       website: row['Website']&.strip,
       notes: row['Notes']&.strip
@@ -43,14 +45,16 @@ namespace :import do
       attributes = {
         first_name: row['Senior Pastor']&.strip,
         last_name: row['Surname']&.strip,
-        church_id: church.id
+        church_id: church.id,
+        pastorscoop: pastorscoop
       }
       Person.create(attributes)
 
       attributes = {
         first_name: row['Senior Pastor2']&.strip,
         last_name: row['Surname']&.strip,
-        church_id: church.id
+        church_id: church.id,
+        pastorscoop: pastorscoop
       }
       Person.create(attributes)
 
@@ -102,7 +106,8 @@ namespace :import do
       last_name: row['Surname']&.strip,
       mobile_tel: row[gender_prefix + ' Cellphone']&.strip,
       email: row[gender_prefix + ' Email']&.strip,
-      church_id: church.id
+      church_id: church.id,
+      pastorscoop: true
     }
 
     return Person.create(attributes)

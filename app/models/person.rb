@@ -17,6 +17,9 @@
 class Person < ActiveRecord::Base
   belongs_to :church
 
+  scope :pastorscoop, -> { where(pastorscoop: true) }
+  scope :churchdb, -> { where(pastorscoop: false) }
+
   validates :first_name, presence: true
   validates :church_id, presence: true
 

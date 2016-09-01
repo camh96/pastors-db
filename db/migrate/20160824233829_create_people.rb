@@ -8,6 +8,7 @@ class CreatePeople < ActiveRecord::Migration
       t.string :mobile_tel
       t.text :notes
       t.string :email
+      t.boolean :pastorscoop, default: false, null: false
 
       t.timestamps null: false
     end
