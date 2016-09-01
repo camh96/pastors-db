@@ -1,5 +1,5 @@
 namespace :import do
-  desc 'TODO'
+  desc 'Import pastorscoop database.'
   task pastorscoop: :environment do
     puts 'Importing pastorscoop data...'
     CSV.foreach('db/csvs/Pastors Co-Op Database v13.csv', headers: true, :encoding => 'windows-1251:utf-8') do |row|
@@ -7,7 +7,7 @@ namespace :import do
     end
   end
 
-  desc 'TODO'
+  desc 'Import church database.'
   task church_database: :environment do
     puts 'Importing church_database data...'
     CSV.foreach('db/csvs/ORIGINAL Church Database v11.csv', headers: true, :encoding => 'windows-1251:utf-8') do |row|

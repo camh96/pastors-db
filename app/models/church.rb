@@ -28,7 +28,7 @@
 class Church < ActiveRecord::Base
   has_many :people, dependent: :destroy
 
-  validates :name, presence: true, unique: true
+  validates :name, presence: true, uniqueness: true
 
   scope :pastorscoop, -> { where(pastorscoop: true) }
   scope :churchdb, -> { where(pastorscoop: false) }
