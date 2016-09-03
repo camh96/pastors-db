@@ -32,6 +32,9 @@ group :development do
   gem 'web-console', '~> 2.0'
   gem 'spring'
   gem 'pry'
+  gem 'capistrano', '~> 3.6.1'
+  gem 'capistrano-rbenv'
+  gem 'capistrano-rails', '~> 1.1'
 end
 
 group :development, :test do
