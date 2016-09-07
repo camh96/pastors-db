@@ -1,7 +1,11 @@
+require 'uri'
+
 ActiveAdmin.register Church do
-  permit_params :active, :address, :church_name, :church_name_alternative, :city, :country, :denomination, :email, :email_alternate, :facebook, :landline_tel, :landline_tel_alternate, :pastorscoop, :postcode, :suburb, :website, person_ids: []
+  permit_params :active, :address, :church_name, :name_alternative, :city, :country, :denomination, :email, :email_alternate, :facebook, :landline_tel, :landline_tel_alternate, :pastorscoop, :postcode, :suburb, :website, person_ids: []
 
   config.sort_order = "name_asc"
+
+      # binding.pry
 
   scope "Pastors Coop", :pastorscoop, default: true
   scope "Church Database", :churchdb
@@ -34,22 +38,32 @@ ActiveAdmin.register Church do
   show do
     attributes_table do
       row :name
-      row :church_name_alternative
+      row :name_alternative
       row :denomination
 
       row :address
       row :suburb
       row :city
       row :postcode
-      row :country
+      # row :country
+      row :email do
+        mail_to church.email
+      end
 
-      row :email
-      row :email_alternate
-      row :facebook
+      row :email_alternate do
+        mail_to church.email_alternate
+      end
+
+      row :facebook do
+        link_to church.name, church.facebook
+      end
       row :landline_tel
       row :landline_tel_alternate
       row :pastorscoop
-      row :website
+
+      row :website do
+        link_to church.website_sans_scheme, church.website_scheme, target: '_BLANK'
+      end
       row :active
     end
     active_admin_comments
@@ -70,40 +84,15 @@ ActiveAdmin.register Church do
         end
         row :conference do
           if person.conference
-            render :text => "Yes".html_safe
+            render :text => '<span class="status_tag yes">Yes</span>'.html_safe
            else
-           render :text => "No".html_safe
+           render :text => '<span class="status_tag no">No</span>'.html_safe
          end
           
         end
         
       end
     end
-
-    # attributes_table do
-
-    #   row :pastors do
-    #     church.people.collect do |p|
-    #       link_to p.name, admin_person_path(p)
-    #     end.join('<br/> ').html_safe
-    #  end
-
-    # row :email do
-    #     church.people.collect do |p|
-    #       p.email
-    #     end.join('<br/> ').html_safe
-    # end
-
-    # row :phone do
-    #     church.people.collect do |p|
-    #       if p.mobile_tel.nil?
-    #        render :text => "<em>Not set!</em>".html_safe
-    #       end
-    #       p.mobile_tel
-    #     end.join('<br/> ').html_safe
-    # end
-
-    # end
   end
 
 

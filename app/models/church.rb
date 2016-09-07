@@ -1,4 +1,4 @@
-# == Schema Information
+# == Scheme Information
 #
 # Table name: churches
 #
@@ -33,4 +33,25 @@ class Church < ActiveRecord::Base
   scope :pastorscoop, -> { where(pastorscoop: true) }
   scope :churchdb, -> { where(pastorscoop: false) }
 
+  def website_scheme
+    if website_has_scheme?
+      website
+    else
+      'http://' + website
+    end
+  end
+
+  def website_sans_scheme
+    if website_has_scheme?
+      website.split('://').last
+    else
+      website
+    end
+  end
+
+  private
+
+    def website_has_scheme?
+      website.include? '://'
+    end
 end
