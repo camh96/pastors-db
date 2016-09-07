@@ -30,7 +30,6 @@ ActiveAdmin.register Church do
     column :active
     actions
   end
-  
 
   show do
     attributes_table do
@@ -52,14 +51,61 @@ ActiveAdmin.register Church do
       row :pastorscoop
       row :website
       row :active
-      row :people do
-        church.people.collect do |person|
-          link_to person.name, admin_person_path(person)
-        end.join(', ').html_safe
-      end
     end
     active_admin_comments
   end
+
+
+  sidebar "Linked Pastor Details", only: :show do
+    church.people.collect do |person|
+      attributes_table do
+        row :name do
+         link_to person.name, admin_person_path(person)
+        end
+        row :email do
+          mail_to person.email
+        end
+        row :phone do
+          person.mobile_tel
+        end
+        row :conference do
+          if person.conference
+            render :text => "Yes".html_safe
+           else
+           render :text => "No".html_safe
+         end
+          
+        end
+        
+      end
+    end
+
+    # attributes_table do
+
+    #   row :pastors do
+    #     church.people.collect do |p|
+    #       link_to p.name, admin_person_path(p)
+    #     end.join('<br/> ').html_safe
+    #  end
+
+    # row :email do
+    #     church.people.collect do |p|
+    #       p.email
+    #     end.join('<br/> ').html_safe
+    # end
+
+    # row :phone do
+    #     church.people.collect do |p|
+    #       if p.mobile_tel.nil?
+    #        render :text => "<em>Not set!</em>".html_safe
+    #       end
+    #       p.mobile_tel
+    #     end.join('<br/> ').html_safe
+    # end
+
+    # end
+  end
+
 
   form do |f|
     f.semantic_errors

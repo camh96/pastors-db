@@ -27,6 +27,7 @@ ActiveAdmin.register Person do
     active_admin_comments
   end
 
+  
   form do |f|
     f.semantic_errors
     inputs do
