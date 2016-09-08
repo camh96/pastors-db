@@ -9,25 +9,5 @@ ActiveAdmin.register_page "Dashboard" do
         small "Welcome to the Pastor Scoop Database. Any issues? Contact it@arisechurch.govt.nz"
       end
     end
-
-    # Here is an example of a simple dashboard with columns and panels.
-    #
-    # columns do
-    #   column do
-    #     panel "Recent Posts" do
-    #       ul do
-    #         Post.recent(5).map do |post|
-    #           li link_to(post.title, admin_post_path(post))
-    #         end
-    #       end
-    #     end
-    #   end
-
-  #     columns do
-  #       panel "Hello!" do
-  #         para "Welcome to Pastor Database. This is still under development"
-  #       end
-  #     end
-    end
-  end # content
-
+  end
+end

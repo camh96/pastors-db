@@ -1,35 +1,22 @@
-require 'uri'
-
 ActiveAdmin.register Church do
-  permit_params :active, :address, :church_name, :name_alternative, :city, :country, :denomination, :email, :email_alternate, :facebook, :landline_tel, :landline_tel_alternate, :pastorscoop, :postcode, :suburb, :website, person_ids: []
+  permit_params :active, :address, :name, :name_alternative, :city, :country, :denomination, :email, :email_alternate, :facebook, :landline_tel, :landline_tel_alternate, :pastorscoop, :postcode, :suburb, :website, person_ids: []
 
   config.sort_order = "name_asc"
-
-      # binding.pry
 
   scope "Pastors Coop", :pastorscoop, default: true
   scope "Church Database", :churchdb
 
   index do
-    # id_column
     column :name, sortable: :name do |church|
       link_to church.name, admin_church_path(church)
     end
-    #column :church_name_alternative
     column :denomination
 
-    #column :address
-    #column :suburb
     column :city
-    #column :postcode
     column :country
 
     column :email
-    #column :email_alternate
-    #column :facebook
     column :landline_tel
-    #column :landline_tel_alternate
-    #column :pastorscoop
     column :website
     column :active
     actions
@@ -45,7 +32,6 @@ ActiveAdmin.register Church do
       row :suburb
       row :city
       row :postcode
-      # row :country
       row :email do
         mail_to church.email
       end
@@ -74,7 +60,7 @@ ActiveAdmin.register Church do
     church.people.collect do |person|
       attributes_table do
         row :name do
-         link_to person.name, admin_person_path(person)
+          link_to person.name, admin_person_path(person)
         end
         row :email do
           mail_to person.email
@@ -88,9 +74,7 @@ ActiveAdmin.register Church do
            else
            render :text => '<span class="status_tag no">No</span>'.html_safe
          end
-          
         end
-        
       end
     end
   end
