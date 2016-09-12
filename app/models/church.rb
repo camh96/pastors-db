@@ -1,4 +1,4 @@
-# == Scheme Information
+# == Schema Information
 #
 # Table name: churches
 #
@@ -31,13 +31,15 @@ class Church < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
 
   scope :pastorscoop, -> { where(pastorscoop: true) }
-  scope :churchdb, -> { where(pastorscoop: false) }
+  scope :churchdb, -> { where(pastorscoop: false) }  
 
   def website_scheme
-    if website_has_scheme?
-      website
-    else
-      'http://' + website
+    if website.present?
+      if website_has_scheme?
+        website
+      else
+        'http://' + website
+      end
     end
   end
 
@@ -52,6 +54,6 @@ class Church < ActiveRecord::Base
   private
 
     def website_has_scheme?
-      website.include? '://'
+      website&.include? '://'
     end
 end

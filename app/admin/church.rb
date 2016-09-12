@@ -62,7 +62,9 @@ ActiveAdmin.register Church do
       row :pastorscoop
 
       row :website do
-        link_to church.website_sans_scheme, church.website_scheme, target: '_BLANK'
+        if church.website.present?
+          link_to church.website_sans_scheme, church.website_scheme, target: '_BLANK'
+        end
       end
       row :active
     end
