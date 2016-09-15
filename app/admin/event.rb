@@ -1,6 +1,8 @@
 ActiveAdmin.register Event do
   permit_params :name, :registrations_database_event_id
 
+  menu false
+
   form do |f|
     f.semantic_errors
     inputs do

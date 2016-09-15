@@ -4,7 +4,7 @@ TODO
 Cam
 ---
 
-[ ] Add Person information to Church page (like in a column on the right or something) (Kind of like the person page in Flocks)
+[ X ] Add Person information to Church page (like in a column on the right or something) (Kind of like the person page in Flocks)
 
 Michael
 -------

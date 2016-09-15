@@ -3,7 +3,7 @@ ActiveAdmin.register Church do
 
   config.sort_order = "name_asc"
 
-  scope "Pastors Coop", :pastorscoop, default: true
+  scope "Pastor Scoop", :pastorscoop, default: true
   scope "Church Database", :churchdb
 
   index do
@@ -41,7 +41,9 @@ ActiveAdmin.register Church do
       end
 
       row :facebook do
-        link_to church.name, church.facebook
+        if church.facebook.present?
+          link_to church.name, church.facebook
+        end
       end
       row :landline_tel
       row :landline_tel_alternate
