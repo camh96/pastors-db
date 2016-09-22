@@ -1,5 +1,5 @@
 namespace :import do
-  desc 'Import pastorscoop database.'
+  desc 'Import pastor scoop database.'
   task pastorscoop: :environment do
     puts 'Importing pastorscoop data...'
     CSV.foreach('db/csvs/Pastors Co-Op Database v13.csv', headers: true, :encoding => 'windows-1251:utf-8') do |row|
@@ -34,7 +34,7 @@ namespace :import do
       landline_tel: row['MainPhone']&.strip,
       landline_tel_alternate: row['AlternatePhone']&.strip,
       pastorscoop: pastorscoop,
-      active: true,
+      # active: true, // hard coded, not quite sure what this is
       website: row['Website']&.strip,
       notes: row['Notes']&.strip
     }      
@@ -107,9 +107,11 @@ namespace :import do
     attributes = {
       first_name: row[gender_prefix + ' Name']&.strip,
       last_name: row['Surname']&.strip,
+      role: row['Pastors']&.strip,
       mobile_tel: row[gender_prefix + ' Cellphone']&.strip,
       email: row[gender_prefix + ' Email']&.strip,
-      pastorscoop: true
+      pastorscoop: true,
+      gender: (gender_prefix == 'His' ? 'Male' : 'Female')
     }
 
     return Person.create(attributes)

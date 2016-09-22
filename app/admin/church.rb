@@ -16,13 +16,7 @@ ActiveAdmin.register Church do
     column :country
 
     column :email
-    column :landline_tel
-    column :website, sortable: :website do |church|
-      if church.website.present?
-        link_to church.website_sans_scheme, church.website_scheme, target: '_BLANK'
-      end 
-    end
-    column :active
+    
     actions
   end
 
@@ -58,7 +52,7 @@ ActiveAdmin.register Church do
           link_to church.website_sans_scheme, church.website_scheme, target: '_BLANK'
         end
       end
-      row :active
+
     end
     active_admin_comments
   end

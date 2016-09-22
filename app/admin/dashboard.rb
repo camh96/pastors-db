@@ -6,7 +6,7 @@ ActiveAdmin.register_page "Dashboard" do
     div class: "blank_slate_container", id: "dashboard_default_message" do
       span class: "blank_slate" do
         span h1 "Hello!"
-        small "Welcome to the Pastor Scoop Database. Any issues? Contact it@arisechurch.govt.nz"
+        small "Welcome to the Pastors Co-Op Database. Any issues? Contact cam.hovell@arisechurch.com"
       end
     end
   end

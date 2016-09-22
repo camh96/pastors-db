@@ -95,6 +95,8 @@ ActiveRecord::Schema.define(version: 20160901035643) do
   create_table "people", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
+    t.string   "gender"
+    t.string   "role"
     t.boolean  "conference"
     t.string   "mobile_tel"
     t.text     "notes"
