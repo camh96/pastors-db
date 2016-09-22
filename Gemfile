@@ -4,6 +4,7 @@ ruby '2.3.0'
 
 gem 'activeadmin', '~> 1.0.0.pre4'
 gem 'devise'
+gem 'active_skin'
 
 gem 'country_select'
 

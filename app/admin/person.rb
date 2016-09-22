@@ -2,11 +2,13 @@ ActiveAdmin.register Person do
   config.filters = true
   preserve_default_filters!
   filter :churches_city, collection: proc  {Church.where.not(city: [nil, '']).order(:city).collect(&:city).uniq}, as: :select
+  
   filter :role, collection: proc  {Person.where.not(role: [nil, '']).order(:role).collect(&:role).uniq}, as: :select
 
+  filter :churches_denomination, collection: proc  {Church.where.not(denomination: [nil, '']).order(:denomination).collect(&:denomination).uniq}, as: :select
 
 
-  permit_params :first_name, :last_name, :conference, :mobile_tel, :email, :gender, :role, church_ids: []
+  permit_params :first_name, :last_name, :conference, :mobile_tel, :email, :gender, :role, :denomination, church_ids: []
 
   scope "Pastors Coop", :pastorscoop, default: true
   scope "Church Database", :churchdb
