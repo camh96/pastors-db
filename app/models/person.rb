@@ -20,6 +20,8 @@ class Person < ActiveRecord::Base
   scope :pastorscoop, -> { where(pastorscoop: true) }
   scope :churchdb, -> { where(pastorscoop: false) }
 
+  scope :without_churches, -> { where(id: church_ids_without_pastors) }
+
   validates :first_name, presence: true
 
   def name
@@ -29,4 +31,11 @@ class Person < ActiveRecord::Base
   def to_s
     name
   end
+
+  def self.church_ids_without_pastors
+    Rails.cache.fetch('person_ids_without_churches', expires_in: 10.minutes) do
+      Person.all.to_a.keep_if {|p| p.churches.blank?}.collect(&:id)
+    end
+  end
+
 end

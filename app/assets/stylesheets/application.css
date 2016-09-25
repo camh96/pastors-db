@@ -13,8 +13,3 @@
  *= require_tree .
  *= require_self
  */
-
-.warning
-{
-  background: #e74c3c;
-}

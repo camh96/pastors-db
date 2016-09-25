@@ -32,6 +32,7 @@ class Church < ActiveRecord::Base
 
   scope :pastorscoop, -> { where(pastorscoop: true) }
   scope :churchdb, -> { where(pastorscoop: false) }  
+  scope :without_pastors, -> { where(id: church_ids_without_pastors) }
 
   def website_scheme
     if website.present?
@@ -55,5 +56,11 @@ class Church < ActiveRecord::Base
 
     def website_has_scheme?
       website&.include? '://'
+    end
+
+    def self.church_ids_without_pastors
+      Rails.cache.fetch('church_ids_without_pastors', expires_in: 10.minutes) do
+        Church.all.to_a.keep_if {|c| c.people.blank?}.collect(&:id)
+      end
     end
 end
