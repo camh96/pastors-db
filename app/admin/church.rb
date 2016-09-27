@@ -3,7 +3,7 @@ ActiveAdmin.register Church do
 
   config.sort_order = "name_asc"
 
-  scope "Pastor Scoop", :pastorscoop, default: true
+  scope "Pastors Coop", :pastorscoop, default: true
   scope "Church Database", :churchdb
 
   index do

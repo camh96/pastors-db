@@ -28,14 +28,28 @@ class Person < ActiveRecord::Base
     [first_name, last_name].join(' ')
   end
 
+  def name_with_church
+    first_church = churches.first
+    if first_church.present?
+      "#{name} (#{first_church.name})"
+    else
+      name
+    end
+  end
+
   def to_s
     name
   end
 
   def self.church_ids_without_pastors
-    Rails.cache.fetch('person_ids_without_churches', expires_in: 10.minutes) do
+    Rails.cache.fetch('person_ids_without_churches_' + Person.last_updated_at, expires_in: 10.minutes) do
       Person.all.to_a.keep_if {|p| p.churches.blank?}.collect(&:id)
     end
   end
 
+  private
+
+    def self.last_updated_at
+      Person.order(:updated_at).last.updated_at.to_i.to_s
+    end
 end

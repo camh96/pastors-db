@@ -1,61 +1,88 @@
-ActiveAdmin.register_page "Dashboard" do
+ActiveAdmin.register_page 'Dashboard' do
 
-  menu :priority => 1
-  content title: proc{ I18n.t("active_admin.dashboard") } do
-    div class: "blank_slate_container", id: "dashboard_default_message" do
-      span class: "blank_slate" do
-        span h1 "Hello!"
-        small "Welcome to the Pastors Co-Op Database. Here you will find a list of things that need doing."
+  last_name_count = Person.where(last_name: [nil, '']).count
+  without_church_count = Person.without_churches.each.count
+  without_pastors_count = Church.without_pastors.each.count
+  location_order_count = Church.where(city: [nil, '']).count
+  things_to_do = location_order_count + last_name_count + without_pastors_count + without_church_count
+
+  if things_to_do == 0
+    menu :priority => 1
+    content title: proc{ I18n.t('active_admin.dashboard') } do
+      div class: 'blank_slate_container' do
+        span class: 'blank_slate' do
+          span h1 'Hello'
+          small 'All Done'
+        end
       end
     end
-  # binding.pry
+  else
+    menu :priority => 1
+    content title: proc{ I18n.t('active_admin.dashboard') } do
+      div class: 'blank_slate_container' do
+        span class: 'blank_slate' do
+          span h1 'Hello!'
+          small 'Welcome to the Pastors Co-Op Database. Here are some database things that haven\'t linked up yet:'
+        end
+      end
 
-    columns do
+      columns do
+        column do
+          if without_church_count === 0
+            panel 'All Pastors have been assigned to a church'
+          else
+            panel Person.without_churches.each.count.to_s + ' Pastors aren\'t assigned to a Church' do
+              ol do
+                Person.without_churches.each do |person|
+                  li link_to person.name, admin_person_path(person.id)
+                end
+              end
+            end
+          end
+        end
 
-      column do
-        panel Person.without_churches.each.count.to_s + " Pastors aren't assigned to a Church" do
-          ol do
-           Person.without_churches.each do |person|
-              li (link_to person.name, admin_person_path(person.id))
+        column do
+          if without_pastors_count === 0
+            panel 'All Churches have been assigned to a pastor'
+          else
+            panel Church.without_pastors.each.count.to_s + ' Churches aren\'t assigned to a Pastor' do
+              ol do
+               Church.without_pastors.each do |church|
+                  li link_to church.name, admin_church_path(church.id)
+                end
+              end
+            end
+          end
+        end
+
+        column do
+          if last_name_count === 0
+            panel 'All Pastors have a last name'
+          else
+            panel Person.where(last_name: [nil, '']).count.to_s + ' Pastors don\'t have a last name' do
+              ol do
+                Person.where(last_name: [nil, '']).map do |person|
+                  li link_to person.name_with_church, admin_person_path(person.id)
+                end
+              end
+            end
+          end
+        end
+
+        column do
+          if location_order_count === 0
+            panel 'All Pastors have a last name'
+          else
+            panel Church.where(city: [nil, '']).count.to_s + ' Churches don\'t have a location added' do
+              ol do
+                Church.where(city: [nil, '']).map do |church|
+                  li link_to church.name, admin_church_path(church.id)
+                end
+              end
             end
           end
         end
       end
-
-      column do
-        panel Church.without_pastors.each.count.to_s + " Churches aren't assigned to a Pastor" do
-          ol do
-           Church.without_pastors.each do |church|
-              li (link_to church.name, admin_church_path(church.id))
-            end
-          end
-        end
-      end
-
-      column do
-        panel Person.where(last_name: [nil, '']).count.to_s + " Pastors don't have a last name" do
-          ol do
-            Person.where(last_name: [nil, '']).map do |person|
-              li (link_to person.name, admin_person_path(person.id))
-            end
-          end
-        end
-      end
-
-       column do
-        panel Church.where(city: [nil, '']).count.to_s + " Churches don't have a location added" do
-          ol do
-           Church.where(city: [nil, '']).map do |church|
-              li (link_to church.name, admin_church_path(church.id))
-            end
-          end
-        end
-      end
-
-
-
     end
-
-    end
-  end 
- 
+  end
+end 
