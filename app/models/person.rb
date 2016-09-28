@@ -50,6 +50,6 @@ class Person < ActiveRecord::Base
   private
 
     def self.last_updated_at
-      Person.order(:updated_at).last.updated_at.to_i.to_s
+      Person.order(:updated_at).last&.updated_at&.to_i&.to_s
     end
 end
