@@ -65,6 +65,27 @@ ActiveAdmin.register Person do
     active_admin_comments
   end
 
+  csv do
+    column :first_name
+    column :last_name
+    column :conference
+    column :mobile_tel
+    column :email
+    column :role
+    column :gender
+
+    column :churches do |person|
+      person.churches.collect(&:name).join(', ')
+    end
+
+    column :city do |person|
+      person.churches.collect(&:city).join(', ')
+    end
+
+    column :created_at
+    column :updated_at
+  end
+
   
   form do |f|
     f.semantic_errors

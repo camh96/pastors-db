@@ -50,6 +50,13 @@ class Person < ActiveRecord::Base
   private
 
     def self.last_updated_at
-      Person.order(:updated_at).last&.updated_at&.to_i&.to_s
+      last_person = Person.order(:updated_at).last
+
+      if last_person.present?
+        last_person.updated_at.to_i.to_s
+      else
+        Time.zone.now.to_i.to_s
+      end
     end
+
 end
